@@ -2,7 +2,7 @@ import 'react-testing-library/cleanup-after-each'
 import 'jest-dom/extend-expect'
 import React from 'react'
 import {render, fireEvent} from 'react-testing-library'
-import Select from '../Select.js'
+import Select from '../Select'
 
 describe('<Select />', () => {
   const placeholder = 'Selecione...'

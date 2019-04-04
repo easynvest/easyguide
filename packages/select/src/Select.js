@@ -28,6 +28,10 @@ class Select extends Component {
   }
 
   componentDidUpdate() {
+    this.onUpdate()
+  }
+
+  onUpdate = () => {
     if(isEmpty(this.state.selectedItem) || isEmpty(this.props.selectedItem)) return
     if(!isEqual(this.state.selectedItem, this.props.selectedItem)) {
       this.setState({ 
@@ -105,6 +109,7 @@ class Select extends Component {
     const customSelect = safe(validateShowInput, showInput)
       .map(() =>
         <InputField
+          key
           type="text"
           autoFocus={isOpen}
           value={this.state.searchValue}
@@ -178,6 +183,7 @@ Select.propTypes = {
   render: PropTypes.func,
   emptyListText: PropTypes.string,
   selectedItem: PropTypes.object,
+  data: PropTypes.array
 }
 
 Select.defaultProps = {
