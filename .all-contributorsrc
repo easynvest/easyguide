@@ -98,6 +98,18 @@
         "test",
         "translation"
       ]
+    },
+    {
+      "login": "leandromsdev",
+      "name": "Leandro Santos",
+      "avatar_url": "https://avatars2.githubusercontent.com/u/35819538?v=4",
+      "profile": "https://github.com/leandromsdev",
+      "contributions": [
+        "code",
+        "doc",
+        "example",
+        "test"
+      ]
     }
   ]
 }
