@@ -19,8 +19,9 @@ class Stepper extends Component {
     const { onChange } = this.props
 
     if (this.previousStep != null) {
-      this.history.push(this.stepToPath(this.previousStep))
-      onChange(this.previousStep, this.steps)
+      const previousStep = this.previousStep
+      this.history.push(this.stepToPath(previousStep))
+      onChange(previousStep, this.steps)
     }
   }
 
@@ -32,8 +33,9 @@ class Stepper extends Component {
       return
     }
 
-    this.history.push(this.stepToPath(this.nextStep))
-    onChange(this.nextStep, this.steps)
+    const nextStep = this.nextStep
+    this.history.push(this.stepToPath(nextStep))
+    onChange(nextStep, this.steps)
   }
 
   stepToPath = stepName => `${this.props.basename}/${stepName}`
