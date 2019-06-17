@@ -16,7 +16,7 @@
     "test": "kcd-scripts test",
     "test:cover": "kcd-scripts test --coverage",
     "build": "kcd-scripts build",
-    "start": "npm run build -- --watch",
+    "start": "kcd-scripts build --watch",
     "prepare": "npm run build",
     "lint": "kcd-scripts lint",
     "validate": "kcd-scripts validate lint,test:cover",
@@ -78,6 +78,7 @@
     "dist"
   ],
   "dependencies": {
-    "history": "^4.7.2"
+    "history": "^4.7.2",
+    "lodash": "^4.17.11"
   }
 }

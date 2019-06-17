@@ -1,6 +1,6 @@
-import React, { Component } from 'react'
-import { createMemoryHistory } from 'history'
-import { isEqual } from 'lodash'
+import React, {Component} from 'react'
+import {createMemoryHistory} from 'history'
+import {isEqual} from 'lodash'
 import PropTypes from 'prop-types'
 
 const StepperContext = React.createContext()
@@ -17,18 +17,18 @@ class Stepper extends Component {
   }
 
   previous = () => {
-    const { onChange } = this.props
+    const {onChange} = this.props
 
     if (this.previousStep != null) {
       const previousStep = this.previousStep
-      this.history.push(this.stepToPath(previousStep))
-      this.setState({ activeStep: previousStep })
+      this.sendHistory(previousStep)
+      this.setState({activeStep: previousStep})
       onChange(previousStep, this.steps)
     }
   }
 
   next = () => {
-    const { onFinish, onChange } = this.props
+    const {onFinish, onChange} = this.props
 
     if (this.nextStep == null) {
       onFinish()
@@ -36,35 +36,43 @@ class Stepper extends Component {
     }
 
     const nextStep = this.nextStep
-    this.history.push(this.stepToPath(nextStep))
-    this.setState({ activeStep: nextStep })
+    this.sendHistory(nextStep)
+    this.setState({activeStep: nextStep})
     onChange(nextStep, this.steps)
   }
 
   stepToPath = stepName => `${this.props.basename}/${stepName.replace(/^\//g, '')}`
 
   pathToStep = pathname => {
-    const pathStep = pathname.replace(`${this.props.basename}/`, '')
-    const [step] = this.steps.filter(stepName => stepName === pathStep)
+    const pathStep = pathname.replace(`${this.props.basename}/`, '/')
+    const [step] = this.steps.filter(stepName => stepName.replace(/^\//g, '') === pathStep.replace(/^\//g, ''))
     return step || this.state.step
   }
 
-  childrenToStepList(arrChildren){
+  childrenToStepList(arrChildren) {
     return arrChildren.map(child => child.props.stepName)
+  }
+
+  sendHistory(path, method = 'push') {
+    const uri = []
+    if(this.props.basename)
+      uri.push(this.props.basename.replace(/^\/|\/$/g, ''))
+    uri.push(path.replace(/^\/|\/$/g, ''))
+    this.history[method](`/${uri.join('/')}`)
   }
 
   constructor(props) {
     super(props)
-    this.steps = this.childrenToStepList(React.Children.toArray(this.props.children))
+    this.steps = this.childrenToStepList(
+      React.Children.toArray(this.props.children),
+    )
 
-    this.state = {
-      activeStep: this.props.activeStep || this.steps[0]
-    }
+    this.state = { activeStep: this.props.activeStep || this.steps[0] }
 
     this.history = props.history || createMemoryHistory()
-    this.history.replace(this.stepToPath(this.state.activeStep))
-    this.unlisten = this.history.listen(({ pathname }) => {
-      this.setState({ activeStep: this.pathToStep(pathname) })
+    this.sendHistory(this.state.activeStep, 'replace')
+    this.unlisten = this.history.listen(({pathname}) => {
+      this.setState({activeStep: this.pathToStep(pathname)})
     })
   }
 
@@ -72,16 +80,16 @@ class Stepper extends Component {
     this.unlisten()
   }
 
-  componentWillReceiveProps({ children }){
+  componentWillReceiveProps({children}) {
     const newSteps = React.Children.toArray(children)
-    if(!isEqual(this.steps, newSteps)){
+    if (!isEqual(this.steps, newSteps)) {
       this.steps = this.childrenToStepList(newSteps)
     }
   }
 
   render() {
-    const { activeStep } = this.state
-    const { onFinish } = this.props
+    const {activeStep} = this.state
+    const {onFinish} = this.props
     const children = React.Children.toArray(this.props.children)
     const extraProps = {
       activeStep,
@@ -89,10 +97,10 @@ class Stepper extends Component {
       steps: this.steps,
       next: this.next,
       history: this.history,
-      onFinish
+      onFinish,
     }
 
-    const [child = null] = children.filter(({ props: { stepName } }) => {
+    const [child = null] = children.filter(({props: {stepName}}) => {
       return activeStep === stepName
     })
 
@@ -117,14 +125,14 @@ Stepper.propTypes = {
     listen: PropTypes.func,
     location: PropTypes.object,
     push: PropTypes.func,
-    replace: PropTypes.func
-  })
+    replace: PropTypes.func,
+  }),
 }
 
 Stepper.defaultProps = {
   basename: '',
   onFinish: () => {},
-  onChange: () => {}
+  onChange: () => {},
 }
 
 export default Stepper

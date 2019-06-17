@@ -56,9 +56,7 @@ describe('<Stepper />', () => {
         <Step stepName="step-2" />
       </Stepper>
     )
-
     fireEvent(rtl.getByTestId('step-next-button'), eventClick)
-
     expect(rtl.container.children).toHaveLength(1)
     expect(rtl.getByTestId('step')).toHaveTextContent('step-2')
   })
@@ -77,15 +75,12 @@ describe('<Stepper />', () => {
     expect(rtl.getByTestId('step')).toHaveTextContent('step-1')
   })
 
-  it('should go to the specific step', () => {
+  it('should go to the specific step', async () => {
     const StepGoTo = withStep(({ history, activeStep }) => (
       <section data-testid="step">
         <h1>{activeStep}</h1>
         <p>description</p>
-        <button
-          onClick={() => history.push('step-3')}
-          data-testid="step-goto-button"
-        >
+        <button onClick={() => history.push('step-3')} data-testid="step-goto-button">
           go to step 3
         </button>
       </section>
@@ -158,3 +153,4 @@ describe('<Stepper />', () => {
     expect(rtl.getByTestId('inner-step')).toHaveTextContent('inner-step-2')
   })
 })
+  
