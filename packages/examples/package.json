@@ -1,6 +1,6 @@
 {
   "name": "examples",
-  "version": "0.9.12",
+  "version": "0.9.13",
   "description": "",
   "main": "index.js",
   "private": true,
@@ -18,7 +18,7 @@
     "@easyguide/checkbox": "^0.9.10",
     "@easyguide/icon": "^0.9.10",
     "@easyguide/rating": "^0.9.10",
-    "@easyguide/select": "^0.9.10",
+    "@easyguide/select": "^0.9.13",
     "@easyguide/stepper": "^0.9.12",
     "@easyguide/table": "^0.9.10",
     "emotion": "^9.2.6",
