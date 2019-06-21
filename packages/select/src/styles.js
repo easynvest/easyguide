@@ -118,7 +118,7 @@ export const dropdownItemStyle = () => css`
   color: #322828;
 
   &:hover {
-    color: #3CCBDA;
+    color: #B130A6;
   }
 `
 
@@ -144,7 +144,7 @@ export const arrowStyle = () => css`
     height: 3px;
     display: inline-block;
     position: absolute;
-    border-bottom: 9px solid #3CCBDA;
+    border-bottom: 9px solid #87027b;
     transform: rotate(0);
     top: 0px;
     left: 9px;
