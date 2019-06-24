@@ -3,7 +3,7 @@ import {css} from 'react-emotion'
 const tagSelectedState = () => css`
   color: white;
   border-color: transparent;
-  background: #3ccbda;
+  background: #6f1167;
 `
 
 export const labelBaseStyle = () => css`
@@ -24,12 +24,12 @@ export const tagBaseStyle = () => css`
   cursor: pointer;
   display: inline-block;
   margin: 0 8px;
-  padding: 6px 12px;
+  padding: 9px 12px;
   border: 1px solid #d8d8d8;
   font-size: 14px;
   color: #322828;
   background-color: white;
-  border-radius: 16px;
+  border-radius: 3px;
   transition: background 120ms linear, color 80ms ease-in;
 
   &:first-child {
@@ -41,7 +41,15 @@ export const tagBaseStyle = () => css`
   }
 
   &:hover {
-    ${tagSelectedState()};
+    color: white;
+    border-color: transparent;
+    background: #b130a6;
+  }
+
+  &:active {
+    color: white;
+    border-color: transparent;
+    background: #87027b;
   }
 `
 
