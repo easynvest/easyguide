@@ -1,6 +1,6 @@
 {
   "name": "examples",
-  "version": "0.9.13",
+  "version": "0.9.14",
   "description": "",
   "main": "index.js",
   "private": true,
@@ -15,7 +15,7 @@
   "keywords": [],
   "author": "Guilherme M. Gregio <guilherme@gregio.net> (http://gregio.net/)",
   "dependencies": {
-    "@easyguide/checkbox": "^0.9.10",
+    "@easyguide/checkbox": "^0.9.14",
     "@easyguide/icon": "^0.9.10",
     "@easyguide/rating": "^0.9.10",
     "@easyguide/select": "^0.9.13",
